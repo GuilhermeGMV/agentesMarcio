@@ -2,44 +2,44 @@
 
 {% block content %}
 <form method="POST">
-    <h3 align="center">Sign up</h3>
+    <h3 align="center">Inscreva-se</h3>
     <div class="form-group">
-        <label for="email">Email Address</label>
+        <label for="email">Endereço de email</label>
         <input
                 type="email"
                 class="form-control"
                 id="email" name="email"
-                placeholder="Enter email"
+                placeholder="Digite seu email"
         />
     </div>
     <div class="form-group">
-        <label for="firstName">First Name</label>
+        <label for="nome">Nome</label>
         <input
                 type="text"
                 class="form-control"
-                id="firstName" name="firstName"
-                placeholder="Enter first name"
+                id="nome" name="nome"
+                placeholder="Digite seu nome"
         />
     </div>
     <div class="form-group">
-        <label for="password1">Password</label>
+        <label for="senha1">Senha</label>
         <input
                 type="password"
                 class="form-control"
-                id="password1" name="password1"
-                placeholder="Enter password"
+                id="senha1" name="senha1"
+                placeholder="Digite sua senha"
         />
     </div>
     <div class="form-group">
-        <label for="password2">Password (Confirm)</label>
+        <label for="senha2">Senha (Confirmar)</label>
         <input
                 type="password"
                 class="form-control"
-                id="password2" name="password2"
-                placeholder="Confirm password"
+                id="senha2" name="senha2"
+                placeholder="Confirme sua senha"
         />
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Confirmar</button>
 </form>
 {% endblock %}

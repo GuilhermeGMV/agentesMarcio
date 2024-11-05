@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 
 from . import db
-from .models import User
+from .models import Usuario
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -13,16 +13,16 @@ auth = Blueprint('auth', __name__)
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
-        password = request.form.get('password')
+        senha = request.form.get('senha')
 
-        user = User.query.filter_by(email=email).first()
+        user = Usuario.query.filter_by(email=email).first()
         if user:
-            if check_password_hash(user.password, password):
+            if check_password_hash(user.senha, senha):
                 flash('Logged in', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
-                flash('Incorrect password', category='erro')
+                flash('Senha Incorreta', category='erro')
         else:
             flash('Email does not exist', category='erro')
 
@@ -40,27 +40,27 @@ def logout():
 def sign_up():
     if request.method == 'POST':
         email = request.form.get('email')
-        firstName = request.form.get('firstName')
-        password1 = request.form.get('password1')
-        password2 = request.form.get('password2')
+        nome = request.form.get('nome')
+        senha1 = request.form.get('senha1')
+        senha2 = request.form.get('senha2')
 
-        user = User.query.filter_by(email=email).first()
-        if user:
+        usuario = Usuario.query.filter_by(email=email).first()
+        if usuario:
             flash('Email already exists.', category='erro')
         elif len(email) < 4:
             flash('Email must be greater than 4 characters.', category='erro')
-        elif len(password1) < 7:
+        elif len(senha1) < 7:
             flash('Passsword must be greater than 7 characters.', category='erro')
-        elif len(firstName) < 2:
+        elif len(nome) < 2:
             flash('First name must be greater than 2 characters.', category='erro')
-        elif password1 != password2:
+        elif senha1 != senha2:
             flash('Passsword dont match.', category='erro')
         else:
-            new_user = User(email=email, first_name=firstName, password=generate_password_hash(password1, method='pbkdf2:sha256'))
+            new_user = Usuario(email=email, nome=nome, senha=generate_password_hash(senha1, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
-            login_user(user, remember=True)
-            flash('Account created successfully.', category='success')
+            login_user(usuario, remember=True)
+            flash('Conta criada com sucesso', category='sucesso')
             return redirect(url_for('views.home'))
 
     return render_template('sign_up.html', user=current_user)
