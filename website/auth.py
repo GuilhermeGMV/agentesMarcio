@@ -29,6 +29,7 @@ def sign_up():
             flash('First name must be greater than 2 characters.', category='erro')
         elif password1 != password2:
             flash('Passsword dont match.', category='erro')
-        #else:
+        else:
+            flash('Account created successfully.', category='success')
             # add user to db
     return render_template('sign_up.html')
