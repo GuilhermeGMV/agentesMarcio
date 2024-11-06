@@ -8,8 +8,10 @@
         <input
                 type="email"
                 class="form-control"
-                id="email" name="email"
+                id="email"
+                name="email"
                 placeholder="Digite seu email"
+                value="{{ request.form.email | default('') }}"
         />
     </div>
     <div class="form-group">
@@ -19,6 +21,7 @@
                 class="form-control"
                 id="nome" name="nome"
                 placeholder="Digite seu nome"
+                value="{{ request.form.nome | default('') }}"
         />
     </div>
     <div class="form-group">
