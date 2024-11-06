@@ -12,7 +12,7 @@
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
                 <a class="nav-item nav-link" id="home" href="/home">Início</a>
-                <a class="nav-item nav-link" id="logout" href="/logout">Sair</a>
+                <a class="nav-item nav-link" id="logout" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
                 {% else %}
                 <a class="nav-item nav-link" id="login" href="/">Entrar</a>
                 <a class="nav-item nav-link" id="signUp" href="/sign-up">Inscreva-se</a>
@@ -20,6 +20,8 @@
             </div>
         </div>
     </nav>
+
+    {% include 'modals/modal_logout.html' %}
 
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
