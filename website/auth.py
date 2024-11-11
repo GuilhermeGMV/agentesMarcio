@@ -55,7 +55,7 @@ def sign_up():
         elif senha1 != senha2:
             flash('As senhas não são iguais', category='erro')
         else:
-            new_user = Usuario(email=email, nome=nome, senha=generate_password_hash(senha1, method='pbkdf2:sha256'))
+            new_user = Usuario(email=email, nome=nome, senha=generate_password_hash(senha1, method='pbkdf2:sha256'), creditos=0)
             db.session.add(new_user)
             db.session.commit()
             login_user(usuario, remember=True)
