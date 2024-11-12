@@ -364,20 +364,20 @@ button[type="submit"]:hover {
 }
 
 #chat-box::-webkit-scrollbar {
-    width: 8px; /* Largura da barra de rolagem */
+    width: 8px;
 }
 
 #chat-box::-webkit-scrollbar-track {
-    background: #262a2f; /* Cor do fundo da barra de rolagem */
+    background: #2d3036;
     border-radius: 10px;
 }
 
 #chat-box::-webkit-scrollbar-thumb {
-    background-color: #101f33; /* Cor do "polegar" da barra de rolagem */
+    background-color: #101f33;
     border-radius: 10px;
-    border: 2px solid #262a2f; /* Espaço ao redor do polegar */
+    border: 2px solid #2d3036;
 }
 
 #chat-box::-webkit-scrollbar-thumb:hover {
-    background-color: #0056b3; /* Cor do polegar ao passar o mouse */
+    background-color: #0056b3;
 }
