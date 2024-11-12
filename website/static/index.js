@@ -1,8 +1,4 @@
-function deleteNote(noteId) {
-    fetch('/delete-note', {
-        method: 'POST',
-        body: JSON.stringify({noteId: noteId}),
-    }).then((_res) => {
-        window.location.href = "/home";
+document.addEventListener("DOMContentLoaded", function() {
+        const chatBox = document.getElementById("chat-box");
+        chatBox.scrollTop = chatBox.scrollHeight; // Rola o chat para o final
     });
-}
