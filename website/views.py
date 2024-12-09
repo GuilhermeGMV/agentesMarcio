@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 import json
 from . import db
@@ -10,25 +10,37 @@ views = Blueprint('views', __name__)
 @views.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
-    conversa = Conversa.query.filter_by(id=1).first()
+    conversa_id = request.args.get('conversa_id', type=int)
+    agente_id = request.args.get('agente_id', default=1, type=int)
+
+    conversa = (
+        Conversa.query.filter_by(id=conversa_id, user_id=current_user.id, agente_id=agente_id).first()
+        if conversa_id
+        else None
+    )
 
     if request.method == 'POST':
+        if 'nova-conversa' in request.form:
+            nova_conversa = Conversa(agente_id=agente_id, user_id=current_user.id)
+            db.session.add(nova_conversa)
+            db.session.commit()
+
+            return redirect(url_for('views.home', conversa_id=nova_conversa.id))
+
         note = request.form.get('note')
 
         if len(note) >= 1:
-            conversa = Conversa.query.filter_by(user_id=current_user.id, agente_id=1).first()
-
             if not conversa:
-                conversa = Conversa(agente_id=1, user_id=current_user.id)
+                conversa = Conversa(agente_id=agente_id, user_id=current_user.id)
                 db.session.add(conversa)
                 db.session.flush()
 
             new_note = Note(data=note, resposta='Resposta do assistente aqui', conversa_id=conversa.id)
             db.session.add(new_note)
-
             db.session.commit()
+    user_conversas = Conversa.query.filter_by(user_id=current_user.id).all()
 
-    return render_template('home.html', user=current_user, conversa=conversa)
+    return render_template('home.html', user=current_user, conversa=conversa, user_conversas=user_conversas)
 
 
 @views.route('/delete-note', methods=['POST'])

@@ -2,19 +2,37 @@
 {% block title %}Chat{% endblock %}
 
 {% block content %}
-<div class="chat-container">
-    <div id="chat-box" class="chat-box">
-        {% if conversa and conversa.messages %}
-            {% for message in conversa.messages %}
-                {% if message.role != 'system' %}
-                    <div class="message {% if message.role == 'user' %}user-message{% elif message.role == 'assistant' %}bot-message{% endif %}">
-                        <p>{{ message.content }}</p>
-                    </div>
-                {% endif %}
+<div class="container">
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <form method="POST">
+                <button type="submit" name="nova-conversa" class="btn-new-conversation">+ Nova Conversa</button>
+            </form>
+        </div>
+        <ul class="conversation-list">
+            {% for c in user_conversas %}
+                <li class="conversation-item {% if c.id == conversa.id %}active{% endif %}">
+                    <a href="/home?conversa_id={{ c.id }}">Conversa {{ c.id }}</a>
+                </li>
             {% endfor %}
-        {% else %}
-            <p>Nenhuma mensagem na conversa atual.</p>
-        {% endif %}
+        </ul>
+    </div>
+
+    <div class="chat-container">
+        <div id="chat-box" class="chat-box">
+            {% if conversa and conversa.messages %}
+                {% for message in conversa.messages %}
+                    {% if message.role != 'system' %}
+                        <div class="message {% if message.role == 'user' %}user-message{% elif message.role == 'assistant' %}bot-message{% endif %}">
+                            <p>{{ message.content }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <h3>Nova Conversa</h3>
+            {% endif %}
+        </div>
     </div>
 </div>
 <form method="POST" class="message-form">
