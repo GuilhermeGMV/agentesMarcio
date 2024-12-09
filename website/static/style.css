@@ -285,7 +285,7 @@ button[type="submit"]:hover {
     background-color: #1f2d3d;
     border-radius: 8px;
     color: #ffffff;
-    height: calc(100vh - 210px); /* Ajusta a altura considerando o navbar e a caixa de mensagem */
+    height: calc(100vh - 210px);
     overflow: hidden;
     position: relative;
 }
@@ -327,12 +327,12 @@ button[type="submit"]:hover {
     display: flex;
     gap: 10px;
     height: 110px;
-    position: fixed; /* Fixa o form em relação à tela */
-    bottom: -80px; /* Alinha o form com a parte inferior da tela */
-    left: 50%; /* Posiciona o centro do form no meio da tela */
-    transform: translateX(-50%); /* Centraliza horizontalmente */
+    position: fixed;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
     border-top: 1px solid #333;
-    z-index: 10; /* Garante que o form fique acima do conteúdo */
+    z-index: 10;
 }
 
 #note {

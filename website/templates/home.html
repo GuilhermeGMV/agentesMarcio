@@ -4,15 +4,17 @@
 {% block content %}
 <div class="chat-container">
     <div id="chat-box" class="chat-box">
-        {% for note in user.notes %}
-        <div class="message user-message">
-            <p>{{ note.data }}</p>
-        </div>
-        <div class="message bot-message">
-            <p>{{ note.resposta }}</p>
-        </div>
-        {% endfor %}
-
+        {% if conversa and conversa.messages %}
+            {% for message in conversa.messages %}
+                {% if message.role != 'system' %}
+                    <div class="message {% if message.role == 'user' %}user-message{% elif message.role == 'assistant' %}bot-message{% endif %}">
+                        <p>{{ message.content }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Nenhuma mensagem na conversa atual.</p>
+        {% endif %}
     </div>
 </div>
 <form method="POST" class="message-form">
