@@ -9,3 +9,10 @@ document.getElementById("note").addEventListener("keypress", function(event) {
             this.form.submit();  // Submete o formulário
         }
 });
+const body = document.querySelector("body"),
+    sidebar = body.querySelector(".sidebar"),
+    toggle = body.querySelector(".toggle");
+
+    toggle.addEventListener("click", () =>{
+        sidebar.classList.toggle("close");
+    })

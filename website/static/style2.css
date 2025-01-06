@@ -52,13 +52,19 @@ h3{
 }
 /*======= Sidebar =======*/
 .sidebar {
+    display: grid;
     position: fixed;
+    grid-template-rows: auto 1fr;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 250px;
+    height: 100vh;
+    width: 247px;
     background: var(--second-color);
     padding: 10px 14px;
+    transition: width 0.3s ease;
+}
+.sidebar.close {
+    width: 50px;
 }
 .sidebar header{
     margin-top: 70px;
@@ -74,20 +80,34 @@ h3{
 .btn-new-conversation:hover{
     background-color: var(--button-hover-color);
 }
-.sidebar .btn-toggle{
+.sidebar.close .btn-new-conversation{
+    opacity: 0;
+    pointer-events: none;
+}
+.sidebar .toggle{
     margin-left: 200px;
     margin-top: -35px;
     margin-bottom: 20px;
     display: flex;
     font-size: 18px;
     font-weight: 500;
-    background-color: var(--second-color);
+    background: none;
     border: var(--second-color);
     color: black;
     transition: var(--tran-03);
 }
-.sidebar .btn-toggle:hover{
+.sidebar .toggle:hover{
     color: var(--black-hover-color);
+    margin-top: -35px;
+}
+.sidebar.close .toggle{
+    margin-left: 0;
+    background: none;
+    margin-top: -55px;
+}
+.sidebar.close li{
+    opacity: 0;
+    pointer-events: none;
 }
 .sidebar li {
     list-style: none;
@@ -98,6 +118,7 @@ h3{
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
+    width: 95%;
 }
 
 .sidebar li:hover {
@@ -109,7 +130,36 @@ h3{
     text-decoration: none;
     color: inherit;
 }
+.conversation-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 100px);
+    padding: 0;
+    margin: 0;
+}
+.sidebar.close .conversation-list{
+    opacity: 0;
+    pointer-events: none;
+}
+.conversation-item.active {
+    background-color: #f0f0f0;
+}
+.conversation-list::-webkit-scrollbar {
+    width: 8px;
+}
 
+.conversation-list::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+.conversation-list::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.conversation-list::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
 
 /*======= Modal =======*/
 #logoutModal {

@@ -3,12 +3,12 @@
 
 {% block content %}
 
-<div class="sidebar" id="sidebar">
+<nav class="sidebar" id="sidebar">
     <header>
         <form method="GET" action="{{ url_for('views.home') }}">
             <button name="nova-conversa" class="btn-new-conversation">+ Nova Conversa</button>
         </form>
-        <button class="btn-toggle" onclick="toggleSidebar()">☰</button>
+        <i class='bx bx-menu toggle'></i>
     </header>
     <ul class="conversation-list">
         {% for c in user_conversas %}
@@ -17,7 +17,7 @@
             </li>
         {% endfor %}
     </ul>
-</div>
+</nav>
 
 <div class="container">
     <div class="chat-container">
