@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
+
 *{
     margin:0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+}
+:root{
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
 }
 body {
     margin: 0;
@@ -385,13 +393,17 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
     width: 250px;
     background-color: #f4f4f4;
-    border-right: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    transition: transform 0.3s ease;
+    padding: 10px 14px;
+    /*border-right: 1px solid #ddd;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*transition: transform 0.3s ease;*/
 }
 
 .sidebar.hidden {
@@ -419,7 +431,6 @@ button[type="submit"]:hover {
     border-radius: 5px;
     cursor: pointer;
     font-size: 15px;
-    cursor: pointer;
     transition: background-color 0.3s ease;
     height: 40px;
 }

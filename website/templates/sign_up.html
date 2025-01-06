@@ -1,48 +1,54 @@
 {% extends "base.html" %} {% block title %}Sign up{% endblock %}
 
 {% block content %}
-<form method="POST">
-    <h3 align="center">Inscreva-se</h3>
-    <div class="form-group">
-        <label for="email">Endereço de email</label>
-        <input
-                type="email"
-                class="form-control"
-                id="email"
-                name="email"
-                placeholder="Digite seu email"
-                value="{{ request.form.email | default('') }}"
-        />
+<h3 align="center">Inscreva-se</h3>
+<div class="container">
+    <div class="login-container">
+        <form method="POST">
+            <div class="form-group">
+                <label for="email">Endereço de email</label>
+                <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu email"
+                        value="{{ request.form.email | default('') }}"
+                />
+            </div>
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="nome" name="nome"
+                        placeholder="Digite seu nome"
+                        value="{{ request.form.nome | default('') }}"
+                />
+            </div>
+            <div class="form-group">
+                <label for="senha1">Senha</label>
+                <input
+                        type="password"
+                        class="form-control"
+                        id="senha1" name="senha1"
+                        placeholder="Digite sua senha"
+                />
+            </div>
+            <div class="form-group">
+                <label for="senha2">Senha (Confirmar)</label>
+                <input
+                        type="password"
+                        class="form-control"
+                        id="senha2" name="senha2"
+                        placeholder="Confirme sua senha"
+                />
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="nome">Nome</label>
-        <input
-                type="text"
-                class="form-control"
-                id="nome" name="nome"
-                placeholder="Digite seu nome"
-                value="{{ request.form.nome | default('') }}"
-        />
-    </div>
-    <div class="form-group">
-        <label for="senha1">Senha</label>
-        <input
-                type="password"
-                class="form-control"
-                id="senha1" name="senha1"
-                placeholder="Digite sua senha"
-        />
-    </div>
-    <div class="form-group">
-        <label for="senha2">Senha (Confirmar)</label>
-        <input
-                type="password"
-                class="form-control"
-                id="senha2" name="senha2"
-                placeholder="Confirme sua senha"
-        />
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Confirmar</button>
-</form>
+</div>
+
 {% endblock %}

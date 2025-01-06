@@ -4,12 +4,12 @@
 {% block content %}
 
 <div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
+    <header>
         <form method="POST">
             <button name="nova-conversa" class="btn-new-conversation">+ Nova Conversa</button>
         </form>
         <button class="btn-toggle" onclick="toggleSidebar()">☰</button>
-    </div>
+    </header>
     <ul class="conversation-list">
         {% for c in user_conversas %}
             <li class="conversation-item {% if c.id == conversa.id %}active{% endif %}">

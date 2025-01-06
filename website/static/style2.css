@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
+
+*{
+    margin:0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+:root{
+    /*======= Colors =======*/
+    --body-color: #262a2f;
+    --second-color: #ffffff;
+    --second-hover-color: #c0c0c0;
+    --third-color: #101f33;
+    --modal-color: #1f2d3d;
+    --button-color: #007bff;
+    --button-hover-color: #0964cb;
+    --button-red-color: #d9534f;
+    --button-red-hover-color: #c9302c;
+    --black-hover-color: #696969;
+
+    /*======= Transitions =======*/
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+}
+
+body{
+    height: 100vh;
+    background: var(--body-color);
+}
+button {
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--second-color);
+    background-color: var(--button-color);
+    border: none;
+    padding: 3px;
+}
+h3{
+    color: var(--second-color);
+    padding: 10px;
+    font-size: 25px;
+}
+.container{
+    display: grid;
+    justify-content: center;
+    border-radius: 6px;
+    align-items: center;
+    margin-top: 20px;
+}
+/*======= Sidebar =======*/
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background: var(--second-color);
+    padding: 10px 14px;
+}
+.sidebar header{
+    margin-top: 70px;
+}
+.btn-new-conversation{
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px;
+    background-color: var(--button-color);
+    color: var(--second-color);
+    transition: var(--tran-03);
+}
+.btn-new-conversation:hover{
+    background-color: var(--button-hover-color);
+}
+.sidebar .btn-toggle{
+    margin-left: 200px;
+    margin-top: -35px;
+    margin-bottom: 20px;
+    display: flex;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: var(--second-color);
+    border: var(--second-color);
+    color: black;
+    transition: var(--tran-03);
+}
+.sidebar .btn-toggle:hover{
+    color: var(--black-hover-color);
+}
+
+/*======= Modal =======*/
+#logoutModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+}
+
+#logoutModal .modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#logoutModal .modal-content {
+    background-color: var(--modal-color);
+    color: var(--second-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    margin: auto;
+}
+
+#logoutModal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#logoutModal .modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: var(--second-color);
+    margin: 0;
+}
+
+#logoutModal .modal-body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--second-hover-color);
+    font-size: 16px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+#logoutModal .modal-footer {
+    border-top: none;
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+#logoutModal .btn-secondary,
+#logoutModal .btn-danger {
+    width: 50%;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#logoutModal .btn-secondary {
+    width: 50%;
+    padding: 10px 10px;
+    background-color: var(--button-color);
+    border: none;
+    border-radius: 5px;
+    color: var(--second-color);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#logoutModal .btn-secondary:hover {
+    background-color: var(--button-hover-color);
+}
+
+#logoutModal .btn-danger {
+    text-decoration: none;
+    text-align: center;
+    background-color: var(--button-red-color);
+    color: var(--second-color);
+}
+
+#logoutModal .btn-danger:hover {
+    background-color: var(--button-red-hover-color);
+}
+
+#logoutModal .close {
+    color: var(--second-color);
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 0.8;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    margin-left: 8px;
+    transition: color 0.3s ease, transform 0.2s ease;
+    line-height: 1;
+}
+
+#logoutModal .close:hover {
+    opacity: 1.0;
+}
+
+/*======= Navbar =======*/
+.navbar {
+    background-color: var(--third-color);
+    font-family: 'Poppins', sans-serif;
+    color: var(--second-color);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar .nav-link {
+    color: var(--second-color);
+    font-size: 16px;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+    text-align: left;
+}
+
+.navbar .nav-link:hover {
+    color: var(--second-hover-color);
+}
+
+.navbar-toggler {
+    color: var(--second-color);
+    border: none;
+}
+.navbar img{
+    width: 40px;
+    border-radius: 6px;
+}
+
+/*======= Alertas =======*/
+.alert {
+    font-family: 'Poppins', sans-serif;
+    width: 80%;
+    max-width: 400px;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    color: #000000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 87px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+
+.alert-danger {
+    background-color: var(--second-color);
+}
+
+.alert-success {
+    background-color: var(--second-color);
+}
+
+.alert .close {
+    color: #000000;
+    font-size: 26px;
+    font-weight: bold;
+    opacity: 0.8;
+    cursor: pointer;
+    padding: 0 5px;
+    background: none;
+    border: none;
+    outline: none;
+    transition: color 0.3s ease, transform 0.2s ease;
+    vertical-align: middle;
+    line-height: 0;
+}
+
+.alert .close:hover {
+    color: #1c1c1c;
+    opacity: 1.0;
+    transform: scale(1.2);
+}
+
+.alert .close:hover {
+    opacity: 1.0;
+}
+
+/*======= Formularios =======*/
+.login-container{
+    justify-content: center;
+    background-color: var(--third-color);
+    border-radius: 6px;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+.form-group{
+    padding: 10px 20px;
+    color: var(--second-color);
+    width: 400px;
+    margin-top: 30px;
+}
+.form-group input{
+    display: flex;
+    margin-left: 20px;
+    width: 90%;
+    border-radius: 5px;
+    padding: 4px 8px;
+    border: none;
+    margin-top: 5px;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 22px;
+    margin-top: 30px;
+}
+.login-container button {
+    padding: 8px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/*======= Chat =======*/
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    background-color: #1f2d3d;
+    border-radius: 8px;
+    color: #ffffff;
+    height: calc(100vh - 300px);
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+.chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: #262a2f;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+    align-self: flex-end;
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.user-message {
+    background-color: #007bff;
+    color: #ffffff;
+    align-self: flex-end;
+}
+
+.bot-message {
+    background-color: #1f2d3d;
+    color: #c0c0c0;
+    align-self: flex-start;
+}
+
+.message-form {
+    display: flex;
+    gap: 10px;
+    height: 40px;
+    position: fixed;
+    margin-bottom: 200px;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 1px solid #333;
+    z-index: 10;
+}
+
+.message-form textarea{
+    width: 800px;
+    border-radius: 6px;
+    padding: 5px;
+    height: 100px;
+}
