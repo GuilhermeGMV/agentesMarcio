@@ -89,6 +89,27 @@ h3{
 .sidebar .btn-toggle:hover{
     color: var(--black-hover-color);
 }
+.sidebar li {
+    list-style: none;
+    padding: 10px 15px;
+    margin: 5px 0;
+    background-color: var(--second-color);
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar li:hover {
+    background-color: var(--second-hover-color);
+    color: black;
+}
+.sidebar li a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
 
 /*======= Modal =======*/
 #logoutModal {
@@ -354,26 +375,42 @@ h3{
     gap: 10px;
 
 }
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
 
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: var(--second-color);
+    border-radius: 10px;
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background-color: var(--second-hover-color);
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background-color: var(--body-color);
+    border-radius: 10px;
+}
 .message {
     padding: 10px 15px;
     border-radius: 10px;
     max-width: 70%;
     word-wrap: break-word;
     align-self: flex-end;
-    background-color: #007bff;
-    color: #ffffff;
+    background-color: var(--button-color);
+    color: var(--second-color);
 }
 
 .user-message {
-    background-color: #007bff;
-    color: #ffffff;
+    background-color: var(--button-color);
+    color: var(--second-color);
     align-self: flex-end;
 }
 
 .bot-message {
-    background-color: #1f2d3d;
-    color: #c0c0c0;
+    background-color: var(--body-color);
+    color: var(--second-hover-color);
     align-self: flex-start;
 }
 
@@ -395,4 +432,22 @@ h3{
     border-radius: 6px;
     padding: 5px;
     height: 100px;
+    resize: none;
+}
+.message-form textarea::-webkit-scrollbar {
+    width: 8px;
+}
+
+.message-form textarea::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+.message-form textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.message-form textarea::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 10px;
 }

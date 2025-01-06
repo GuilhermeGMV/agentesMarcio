@@ -5,7 +5,7 @@
 
 <div class="sidebar" id="sidebar">
     <header>
-        <form method="POST">
+        <form method="GET" action="{{ url_for('views.home') }}">
             <button name="nova-conversa" class="btn-new-conversation">+ Nova Conversa</button>
         </form>
         <button class="btn-toggle" onclick="toggleSidebar()">☰</button>
