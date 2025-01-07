@@ -27,6 +27,8 @@
 }
 
 body{
+    display: flex;
+    flex-direction: column;
     height: 100vh;
     background: var(--body-color);
 }
@@ -95,6 +97,7 @@ h3{
     border: var(--second-color);
     color: black;
     transition: var(--tran-03);
+    cursor: pointer;
 }
 .sidebar .toggle:hover{
     color: var(--black-hover-color);
@@ -404,7 +407,7 @@ h3{
 .chat-container {
     display: flex;
     flex-direction: column;
-    width: 1000px;
+    width: calc(60vw - 150px);
     background-color: #1f2d3d;
     border-radius: 8px;
     color: #ffffff;
@@ -412,6 +415,7 @@ h3{
     overflow: hidden;
     position: relative;
     padding: 20px;
+    margin-left: 180px;
 }
 
 .chat-box {
@@ -473,16 +477,16 @@ h3{
     bottom: -80px;
     left: 50%;
     transform: translateX(-50%);
-    border-top: 1px solid #333;
     z-index: 10;
 }
 
 .message-form textarea{
-    width: 800px;
+    width: calc(30vw - 10px);
     border-radius: 6px;
     padding: 5px;
     height: 100px;
     resize: none;
+    margin-left: 200px;
 }
 .message-form textarea::-webkit-scrollbar {
     width: 8px;
