@@ -86,6 +86,16 @@ h3{
     opacity: 0;
     pointer-events: none;
 }
+.sidebar .delet {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.sidebar .delet:hover {
+    color: var(--black-hover-color);
+}
 .sidebar .toggle{
     margin-left: 200px;
     margin-top: -35px;
@@ -122,7 +132,11 @@ h3{
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
 
 .sidebar li:hover {
     background-color: var(--second-hover-color);
@@ -132,6 +146,7 @@ h3{
     display: block;
     text-decoration: none;
     color: inherit;
+    flex-grow: 1;
 }
 .conversation-list {
     flex-grow: 1;
@@ -278,6 +293,118 @@ h3{
     opacity: 1.0;
 }
 
+#deleteModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+}
+
+#deleteModal .modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#deleteModal .modal-content {
+    background-color: var(--modal-color);
+    color: var(--second-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    margin: auto;
+}
+
+#deleteModal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#deleteModal .modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: var(--second-color);
+    margin: 0;
+}
+
+#deleteModal .modal-body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--second-hover-color);
+    font-size: 18px;
+    text-align: center;
+    margin: 18px 0;
+}
+
+#deleteModal .modal-footer {
+    border-top: none;
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+#deleteModal .btn-secondary,
+#deleteModal .btn-danger {
+    width: 50%;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#deleteModal .btn-secondary {
+    width: 50%;
+    padding: 10px 10px;
+    background-color: var(--button-color);
+    border: none;
+    border-radius: 5px;
+    color: var(--second-color);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#deleteModal .btn-secondary:hover {
+    background-color: var(--button-hover-color);
+}
+
+#deleteModal .btn-danger {
+    text-decoration: none;
+    text-align: center;
+    background-color: var(--button-red-color);
+    color: var(--second-color);
+}
+
+#deleteModal .btn-danger:hover {
+    background-color: var(--button-red-hover-color);
+}
+
+#deleteModal .close {
+    color: var(--second-color);
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 0.8;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    margin-left: 8px;
+    transition: color 0.3s ease, transform 0.2s ease;
+    line-height: 1;
+}
+
+#deleteModal .close:hover {
+    opacity: 1.0;
+}
 /*======= Navbar =======*/
 .navbar {
     background-color: var(--third-color);

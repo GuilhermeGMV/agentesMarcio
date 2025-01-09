@@ -10,7 +10,6 @@ views = Blueprint('views', __name__)
 @views.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
-    print('...')  # Para depuração
     conversa_id = request.args.get('conversa_id', type=int)
     agente_id = request.args.get('agente_id', default=1, type=int)
 
@@ -23,7 +22,6 @@ def home():
     if request.method == 'POST':
         note = request.form.get('note')
 
-        # Cria uma nova conversa somente ao enviar a primeira mensagem
         if len(note) >= 1:
             if not conversa:
                 conversa = Conversa(agente_id=agente_id, user_id=current_user.id)
@@ -37,9 +35,16 @@ def home():
             return redirect(url_for('views.home', conversa_id=conversa.id))
 
     user_conversas = Conversa.query.filter_by(user_id=current_user.id).all()
+    user_conversas_with_numbers = [
+        {'numero': idx + 1, 'id': conversa.id} for idx, conversa in enumerate(user_conversas)
+    ]
 
-    return render_template('home.html', user=current_user, conversa=conversa, user_conversas=user_conversas)
-
+    return render_template(
+        'home.html',
+        user_conversas=user_conversas_with_numbers,
+        conversa=conversa,
+        user=current_user
+    )
 
 
 @views.route('/delete-note', methods=['POST'])
@@ -53,3 +58,22 @@ def delete_note():
             db.session.commit()
 
     return jsonify({})
+
+
+@views.route('/delete-conversa', methods=['POST', 'GET'])
+@login_required
+def delete_conversa():
+    print(request.method)
+    conversa_id = request.form.get('conversa_id')
+
+    conversa = Conversa.query.filter_by(id=conversa_id, user_id=current_user.id).first()
+    if not conversa:
+        return flash('erro 404: Conversa não encontrada ou você não tem permissão para deletá-la'), 404
+
+    for note in conversa.notes:
+        db.session.delete(note)
+    db.session.delete(conversa)
+    db.session.commit()
+    flash('Conversa deletada com sucesso')
+
+    return flash('Conversa deletada com sucesso')

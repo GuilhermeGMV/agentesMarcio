@@ -13,10 +13,12 @@
     <ul class="conversation-list">
         {% for c in user_conversas %}
             <li class="conversation-item {% if c.id == conversa.id %}active{% endif %}">
-                <a href="/home?conversa_id={{ c.id }}">{{ c.id }}</a>
+                <a href="/home?conversa_id={{ c.id }}">Conversa {{ c.numero }}</a>
+                <i class='bx bxs-x-circle delet' id="delet" href="#" data-toggle="modal" data-target="#deleteModal"></i>
             </li>
         {% endfor %}
     </ul>
+
 </nav>
 
 <div class="container">
@@ -37,14 +39,11 @@
         </div>
     </div>
 </div>
-<script>
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('hidden');
-    }
-</script>
 <form method="POST" class="message-form">
     <textarea name="note" id="note" class="form-control" placeholder="Digite sua mensagem..."></textarea>
     <button type="submit" class="btn-send">Enviar</button>
 </form>
+
+{% include 'modals/modal_delete.html' %}
+
 {% endblock %}
