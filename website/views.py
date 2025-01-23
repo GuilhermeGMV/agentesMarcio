@@ -13,6 +13,7 @@ def home():
     conversa_id = request.args.get('conversa_id', type=int)
     agente_id = request.args.get('agente_id', default=1, type=int)
 
+    # Obtém a conversa específica se o ID foi passado
     conversa = (
         Conversa.query.filter_by(id=conversa_id, user_id=current_user.id, agente_id=agente_id).first()
         if conversa_id
@@ -23,20 +24,28 @@ def home():
         note = request.form.get('note')
 
         if len(note) >= 1:
+            # Cria uma nova conversa se não houver uma ativa
             if not conversa:
-                conversa = Conversa(agente_id=agente_id, user_id=current_user.id)
+                novo_numero_fixo = Conversa.gerar_numero_fixo(current_user.id)
+                conversa = Conversa(agente_id=agente_id, user_id=current_user.id, numero_fixo=novo_numero_fixo)
                 db.session.add(conversa)
-                db.session.flush()  # Garante que a conversa tenha um ID para vincular a mensagem
+                db.session.flush()  # Garante que a conversa tenha um ID antes de usar
 
+            # Cria uma nova nota associada à conversa
             new_note = Note(data=note, resposta='Resposta do assistente aqui', conversa_id=conversa.id)
             db.session.add(new_note)
             db.session.commit()
 
             return redirect(url_for('views.home', conversa_id=conversa.id))
 
-    user_conversas = Conversa.query.filter_by(user_id=current_user.id).all()
+    # Obtém todas as conversas do usuário, incluindo o número fixo
+    user_conversas = (
+        Conversa.query.filter_by(user_id=current_user.id)
+        .order_by(Conversa.numero_fixo.asc())  # Ordena pelas conversas na ordem dos números fixos
+        .all()
+    )
     user_conversas_with_numbers = [
-        {'numero': idx + 1, 'id': conversa.id} for idx, conversa in enumerate(user_conversas)
+        {'numero': conversa.numero_fixo, 'id': conversa.id} for conversa in user_conversas
     ]
 
     return render_template(
@@ -45,6 +54,7 @@ def home():
         conversa=conversa,
         user=current_user
     )
+
 
 
 @views.route('/delete-note', methods=['POST'])
@@ -60,20 +70,24 @@ def delete_note():
     return jsonify({})
 
 
-@views.route('/delete-conversa', methods=['POST', 'GET'])
+@views.route('/delete-conversa', methods=['POST'])
 @login_required
 def delete_conversa():
-    print(request.method)
     conversa_id = request.form.get('conversa_id')
+
+    if not conversa_id:
+        flash('ID da conversa não fornecido.', 'error')
+        return redirect(url_for('views.home'))
 
     conversa = Conversa.query.filter_by(id=conversa_id, user_id=current_user.id).first()
     if not conversa:
-        return flash('erro 404: Conversa não encontrada ou você não tem permissão para deletá-la'), 404
+        flash('Erro 404: Conversa não encontrada ou você não tem permissão para deletá-la', 'error')
+        return redirect(url_for('views.home'))
 
     for note in conversa.notes:
         db.session.delete(note)
     db.session.delete(conversa)
     db.session.commit()
-    flash('Conversa deletada com sucesso')
+    flash('Conversa deletada com sucesso', 'success')
 
-    return flash('Conversa deletada com sucesso')
+    return redirect(url_for('views.home'))

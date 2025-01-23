@@ -12,7 +12,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <a href="/delete-conversa" class="btn btn-danger" >Excluir</a>
+                <form method="POST" action="{{ url_for('views.delete_conversa') }}">
+                    <input type="hidden" name="conversa_id" id="conversa-id-input">
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                </form>
             </div>
         </div>
     </div>

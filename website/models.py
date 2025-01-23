@@ -25,6 +25,7 @@ class Conversa(db.Model):
     notes = db.relationship('Note')
     agente_id = db.Column(db.Integer, db.ForeignKey('agente.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+    numero_fixo = db.Column(db.Integer, nullable=False, unique=False)
 
     @property
     def messages(self):
@@ -37,6 +38,16 @@ class Conversa(db.Model):
             messages.append({"role": "assistant", "content": note.resposta})
 
         return messages
+
+    @staticmethod
+    def gerar_numero_fixo(user_id):
+        """
+        Gera o próximo número fixo para o usuário com base nas conversas existentes.
+        """
+        ultima_conversa = (
+            Conversa.query.filter_by(user_id=user_id).order_by(Conversa.numero_fixo.desc()).first()
+        )
+        return (ultima_conversa.numero_fixo + 1) if ultima_conversa else 1
 
 
 class Agente(db.Model):

@@ -16,3 +16,10 @@ const body = document.querySelector("body"),
     toggle.addEventListener("click", () =>{
         sidebar.classList.toggle("close");
     })
+
+document.querySelectorAll('.delet').forEach(button => {
+        button.addEventListener('click', function() {
+            const conversaId = this.closest('.conversation-item').querySelector('a').href.split('=')[1];
+            document.getElementById('conversa-id-input').value = conversaId;
+        });
+    });

@@ -347,30 +347,26 @@ h3{
 #deleteModal .modal-footer {
     border-top: none;
     display: flex;
-    justify-content: space-around;
-    gap: 15px;
+    justify-content: space-between;
+    gap: 16px;
 }
 
 #deleteModal .btn-secondary,
 #deleteModal .btn-danger {
-    width: 50%;
-    padding: 10px 10px;
-    border-radius: 5px;
+    flex: 1;
+    padding: 10px;
     font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
     cursor: pointer;
+    width: 222px;
     transition: background-color 0.3s ease;
 }
 
 #deleteModal .btn-secondary {
-    width: 50%;
-    padding: 10px 10px;
     background-color: var(--button-color);
-    border: none;
-    border-radius: 5px;
     color: var(--second-color);
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    border: none;
 }
 
 #deleteModal .btn-secondary:hover {
@@ -378,10 +374,9 @@ h3{
 }
 
 #deleteModal .btn-danger {
-    text-decoration: none;
-    text-align: center;
     background-color: var(--button-red-color);
     color: var(--second-color);
+    border: none;
 }
 
 #deleteModal .btn-danger:hover {
