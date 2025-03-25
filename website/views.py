@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 from flask_login import login_required, current_user
 import json
 from . import db
-from .models import Note, Conversa
+from .models import Note, Conversa, Agente
 
 views = Blueprint('views', __name__)
 
@@ -11,47 +11,61 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     conversa_id = request.args.get('conversa_id', type=int)
-    agente_id = request.args.get('agente_id', default=1, type=int)
+    agente_id = request.args.get('agente_id', default=None, type=int)
 
-    # Obtém a conversa específica se o ID foi passado
     conversa = (
-        Conversa.query.filter_by(id=conversa_id, user_id=current_user.id, agente_id=agente_id).first()
+        Conversa.query.filter_by(id=conversa_id, user_id=current_user.id).first()
         if conversa_id
         else None
     )
 
+    agente = None
+    if conversa:
+        agente = Agente.query.get(conversa.agente_id)
+    agenteSelecionado = bool(agente_id or conversa)
+
+    print("Request args:", request.args)
+    print("Request form:", request.form)
+    print("Agente ID recebido:", agente_id)
+
     if request.method == 'POST':
         note = request.form.get('note')
-
         if len(note) >= 1:
-            # Cria uma nova conversa se não houver uma ativa
             if not conversa:
                 novo_numero_fixo = Conversa.gerar_numero_fixo(current_user.id)
                 conversa = Conversa(agente_id=agente_id, user_id=current_user.id, numero_fixo=novo_numero_fixo)
                 db.session.add(conversa)
-                db.session.flush()  # Garante que a conversa tenha um ID antes de usar
+                db.session.flush()
 
-            # Cria uma nova nota associada à conversa
             new_note = Note(data=note, resposta='Resposta do assistente aqui', conversa_id=conversa.id)
             db.session.add(new_note)
             db.session.commit()
 
             return redirect(url_for('views.home', conversa_id=conversa.id))
 
-    # Obtém todas as conversas do usuário, incluindo o número fixo
     user_conversas = (
         Conversa.query.filter_by(user_id=current_user.id)
-        .order_by(Conversa.numero_fixo.asc())  # Ordena pelas conversas na ordem dos números fixos
+        .order_by(Conversa.numero_fixo.asc())
         .all()
     )
     user_conversas_with_numbers = [
-        {'numero': conversa.numero_fixo, 'id': conversa.id} for conversa in user_conversas
+        {
+            'numero': conversa.numero_fixo,
+            'id': conversa.id,
+            'agente_nome': Agente.query.get(conversa.agente_id).nome if conversa.agente_id else "Sem agente"
+        }
+        for conversa in user_conversas
     ]
+
+    agentes = Agente.query.all()
 
     return render_template(
         'home.html',
         user_conversas=user_conversas_with_numbers,
         conversa=conversa,
+        agente=agente,
+        agenteSelecionado=agenteSelecionado,
+        agentes=agentes,
         user=current_user
     )
 

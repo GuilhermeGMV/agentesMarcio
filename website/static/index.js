@@ -23,3 +23,20 @@ document.querySelectorAll('.delet').forEach(button => {
             document.getElementById('conversa-id-input').value = conversaId;
         });
     });
+
+function toggleTextarea() {
+    const agenteSelect = document.getElementById("agente");
+    const messageForm = document.getElementById("message-form-container");
+
+    const conversaAtiva = document.querySelector(".conversation-item.active");
+
+    if (conversaAtiva || (agenteSelect && agenteSelect.value)) {
+        messageForm.style.display = "block";
+    } else {
+        messageForm.style.display = "none";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    toggleTextarea();
+});

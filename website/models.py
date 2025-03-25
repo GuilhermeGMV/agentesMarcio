@@ -52,5 +52,6 @@ class Conversa(db.Model):
 
 class Agente(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(150))
-    parametro = db.Column(db.String(10000))
+    nome = db.Column(db.String(150), nullable=False)
+    parametro = db.Column(db.String(10000), nullable=True)
+

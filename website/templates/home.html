@@ -13,7 +13,7 @@
     <ul class="conversation-list">
         {% for c in user_conversas %}
             <li class="conversation-item {% if c.id == conversa.id %}active{% endif %}">
-                <a href="/home?conversa_id={{ c.id }}">Conversa {{ c.numero }}</a>
+                <a href="/home?conversa_id={{ c.id }}">{{ c.numero }} - {{ c.agente_nome }} </a>
                 <i class='bx bxs-x-circle delet' id="delet" href="#" data-toggle="modal" data-target="#deleteModal"></i>
             </li>
         {% endfor %}
@@ -24,6 +24,9 @@
     <div class="chat-container">
         <div id="chat-box" class="chat-box">
             {% if conversa and conversa.messages %}
+                {% if agente %}
+                    <h3>{{ agente.nome }}</h3>
+                {% endif %}
                 {% for message in conversa.messages %}
                     {% if message.role != 'system' %}
                         <div class="message {% if message.role == 'user' %}user-message{% elif message.role == 'assistant' %}bot-message{% endif %}">
@@ -33,15 +36,28 @@
                 {% endfor %}
             {% else %}
                 <h3>Nova Conversa</h3>
-
+                <form method="GET" action="{{ url_for('views.home') }}">
+                    <label for="agente">Selecione um agente:</label>
+                    <select id="agente" name="agente_id" class="form-control" onchange="this.form.submit()">
+                        <option value="" selected>-- Selecione um agente --</option>
+                        {% for agente in agentes %}
+                        <option value="{{ agente.id }}"
+                                {% if agente.id == request.args.get('agente_id', default=None)|int %}selected{% endif %}>
+                            {{ agente.nome }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </form>
             {% endif %}
         </div>
     </div>
 </div>
-<form method="POST" class="message-form">
-    <textarea name="note" id="note" class="form-control" placeholder="Digite sua mensagem..."></textarea>
-    <button type="submit" class="btn-send">Enviar</button>
-</form>
+<div id="message-form-container" style="display: none;">
+    <form method="POST" class="message-form">
+        <textarea name="note" id="note" class="form-control" placeholder="Digite sua mensagem..."></textarea>
+        <button type="submit" class="btn-send">Enviar</button>
+    </form>
+</div>
 
 {% include 'modals/modal_delete.html' %}
 
