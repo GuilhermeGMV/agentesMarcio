@@ -9,7 +9,8 @@ DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'fdh**76!@a d()!@#&_14fhad fha541dhfd2131¨&#¨@e19#'
+    # essa chave só aparece aqui pois esse projeto nunca vai para produção, se fosse seria imprescindível esconde-la de alguma forma, usando um .env por exemplo
+    app.config['SECRET_KEY'] = 'this-is-just-for-demo'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
 
